@@ -1,8 +1,8 @@
 import Navbar from './Navbar'
 import Page1Content from './Page1Content'
 const Section1 = (props) => {
-    console.log(props.user);
-    
+  console.log(props.user);
+
   return (
     <div className='h-screen w-full'>
       <Navbar />
