@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=JetBrains+Mono:wght@500;600&display=swap");
+
+:root {
+  --bg: #0c0d10;
+  --card: #17181d;
+  --card-border: #2a2c33;
+  --text: #eceef2;
+  --text-muted: #7d808c;
+
+  --accent: #7c6cff;
+  --accent-strong: #9788ff;
+  --accent-soft: rgba(124, 108, 255, 0.14);
+  --accent-glow: rgba(124, 108, 255, 0.45);
+
+  --danger: #ff6b6b;
+
+  --font-display: "Sora", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.background {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    radial-gradient(
+      circle at 50% 15%,
+      rgba(124, 108, 255, 0.1),
+      transparent 55%
+    ),
+    var(--bg);
+  font-family: var(--font-display);
+}
+
+.box {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 28px;
+  background: var(--card);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.6);
+}
+
+/* ---- top: reset ---- */
+
+.top {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.top button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition:
+    border-color 150ms var(--ease),
+    color 150ms var(--ease),
+    transform 300ms var(--ease);
+}
+
+.top button:hover {
+  border-color: var(--accent-glow);
+  color: var(--accent-strong);
+}
+
+.top button:active {
+  transform: rotate(-90deg);
+}
+
+.top button svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ---- center: number display ---- */
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 0;
+}
+
+.projectNum {
+  font-family: var(--font-mono);
+  font-size: 72px;
+  font-weight: 600;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+  text-shadow: 0 0 32px var(--accent-glow);
+  transition: text-shadow 200ms var(--ease);
+}
+
+/* .projectNum::before {
+  content: "0"; /* fallback so the layout has height before JS sets a value */
+/* } */
+
+/* if you render the count as text content instead, remove the ::before
+   above and just make sure .projectNum isn't empty in the DOM */
+
+/* ---- bottom: controls ---- */
+
+.bottom {
+  display: flex;
+  justify-content: center;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.control button {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid var(--card-border);
+  background: transparent;
+  color: var(--text);
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 120ms var(--ease),
+    border-color 150ms var(--ease),
+    background 150ms var(--ease),
+    box-shadow 150ms var(--ease);
+}
+
+.control button:active {
+  transform: scale(0.92);
+}
+
+/* minus — ghost/outline */
+.control button:first-child:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* plus — filled accent */
+.control button:last-child {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0c0d10;
+  box-shadow: 0 8px 24px -8px var(--accent-glow);
+}
+
+.control button:last-child:hover {
+  background: var(--accent-strong);
+  border-color: var(--accent-strong);
+}
