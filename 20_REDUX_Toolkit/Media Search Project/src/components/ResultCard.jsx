@@ -12,13 +12,23 @@ const ResultCard = ({ item }) => {
     }
 
   return (
-    <div className="w-[18vw] relative h-80 bg-white rounded-xl overflow-hidden">
-      <a href={item.url} target="_blank">
+    <article className="window flex h-full flex-col">
+      <div className="titlebar text-base">
+        <span className="truncate">{item.type}</span>
+      </div>
+
+      <a
+        href={item.url}
+        target="_blank"
+        rel="noreferrer"
+        className="bevel-in mx-3 mt-3 block aspect-4/3 overflow-hidden bg-ink"
+      >
         {item.type == "photo" ? (
           <img
             className="h-full w-full object-cover object-center"
             src={item.src}
-            alt=""
+            alt={item.title || ""}
+            loading="lazy"
           />
         ) : (
           ""
@@ -29,29 +39,31 @@ const ResultCard = ({ item }) => {
             autoPlay
             loop
             muted
+            playsInline
             src={item.src}
           ></video>
         ) : (
           ""
         )}
       </a>
+
       <div
         id="bottom"
-        className="flex justify-between gap-3 items-center w-full px-4 py-6 absolute bottom-0 text-white"
+        className="flex flex-1 items-start justify-between gap-3 p-3"
       >
-        <h2 className="text-lg font-semibold capitalize h-14 overflow-hidden">
+        <h2 className="line-clamp-2 min-h-2.5rem text-sm font-semibold capitalize sm:text-base">
           {item.title}
         </h2>
         <button
           onClick={() => {
             addToCollection(item);
           }}
-          className="bg-indigo-600 active:scale-95 text-white rounded px-3 py-1 cursor-pointer font-medium"
+          className="retro-btn shrink-0 px-3 py-1 text-sm font-medium"
         >
           Save
         </button>
       </div>
-    </div>
+    </article>
   );
 };
 

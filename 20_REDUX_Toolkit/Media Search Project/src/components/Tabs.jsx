@@ -8,11 +8,16 @@ const Tabs = () => {
   const activeTab = useSelector((state) => state.search.activeTab);
 
   return (
-    <div className="flex gap-10 p-10">
+    <div
+      role="tablist"
+      className="flex items-end gap-1 border-b-4 border-ink px-1"
+    >
       {tabs.map(function (elem, idx) {
         return (
           <button
-            className={`${activeTab == elem ? "bg-blue-700" : "bg-emerald-600"} transition  px-5 py-2 rounded uppercase cursor-pointer active:scale-95`}
+            role="tab"
+            aria-selected={activeTab == elem}
+            className="tab text-sm sm:text-base"
             key={idx}
             onClick={() => {
               dispatch(setActiveTab(elem));

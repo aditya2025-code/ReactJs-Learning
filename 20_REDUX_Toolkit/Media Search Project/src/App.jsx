@@ -7,14 +7,16 @@ import { ToastContainer } from "react-toastify";
 
 const App = () => {
   return (
-    <div className="min-h-screen text-white w-full bg-gray-950">
+    <div className="desktop min-h-screen w-full bg-desk font-mono text-ink">
       <Navbar />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/collection" element={<CollectionPage />} />
-      </Routes>
+      <main className="pb-12">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/collection" element={<CollectionPage />} />
+        </Routes>
+      </main>
 
-      <ToastContainer />
+      <ToastContainer toastClassName="retro-toast" />
     </div>
   );
 };

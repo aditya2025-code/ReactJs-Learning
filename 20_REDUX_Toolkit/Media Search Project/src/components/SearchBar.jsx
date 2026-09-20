@@ -15,26 +15,38 @@ const SearchBar = () => {
   };
 
   return (
-    <div>
+    <section className="window">
+      <div className="titlebar">
+        <span>Search.exe</span>
+        <span className="flex gap-1" aria-hidden="true">
+          <span className="tb-btn" />
+          <span className="tb-btn" />
+        </span>
+      </div>
+
       <form
         onSubmit={(e) => submitHandler(e)}
-        className="flex gap-5 bg-(--c1) p-10"
+        className="flex flex-col gap-3 p-4 sm:flex-row sm:gap-4 sm:p-6"
       >
+        <label htmlFor="search-input" className="sr-only">
+          Search photos and videos
+        </label>
         <input
+          id="search-input"
           value={text}
           onChange={(e)=>{
             setText(e.target.value)
           }}
-          className="w-full border-2 px-4 py-2 text-xl rounded outline-none"
+          className="retro-input min-w-0 flex-1 px-3 py-2 text-base sm:text-xl"
           type="text"
           placeholder="Search Anything"
           required
         />
-        <button className="active:scale-95 cursor-pointer border-2 px-4 py-2 text-xl rounded outline-none">
+        <button className="retro-btn px-6 py-2 text-lg font-semibold sm:text-xl">
           Search
         </button>
       </form>
-    </div>
+    </section>
   );
 };
 

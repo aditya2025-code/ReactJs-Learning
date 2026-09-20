@@ -1,16 +1,187 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=VT323&display=swap");
 @import "tailwindcss";
 
-#bottom {
-  background: linear-gradient(transparent, black);
+/* ---------- Design tokens (Tailwind v4) ---------- */
+@theme {
+  --font-display: "VT323", ui-monospace, "Courier New", monospace;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Courier New", monospace;
+
+  --color-desk: #0e6b6b;        /* desktop teal */
+  --color-chrome: #d4d0c8;      /* window grey */
+  --color-chrome-dark: #a9a59d; /* inactive tab */
+  --color-ink: #111111;
+  --color-title: #0a1a7a;       /* title bar start */
+  --color-title-2: #1c6fd1;     /* title bar end */
+  --color-hilite: #ffd400;      /* yellow highlight */
 }
 
-* {
-  font-family: helvetica;
+@layer base {
+  body {
+    margin: 0;
+    font-family: var(--font-mono);
+  }
+  ::selection {
+    background: var(--color-title);
+    color: #fff;
+  }
 }
 
-:root {
-  --c1: rgb(7, 35, 67);
-  --c2: rgb(20, 65, 117);
-  --c3: rgb(29, 84, 108);
-  --c4: rgb(244, 244, 244);
+@layer components {
+  /* dotted teal desktop */
+  .desktop {
+    background-color: var(--color-desk);
+    background-image: radial-gradient(rgba(0, 0, 0, 0.2) 1px, transparent 1px);
+    background-size: 4px 4px;
+  }
+
+  /* window = grey panel with hard black shadow */
+  .window {
+    background: var(--color-chrome);
+    color: var(--color-ink);
+    border: 2px solid var(--color-ink);
+    box-shadow: 4px 4px 0 var(--color-ink);
+  }
+
+  .titlebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding: 0.125rem 0.5rem;
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    background: linear-gradient(90deg, var(--color-title), var(--color-title-2));
+    user-select: none;
+  }
+
+  .tb-btn {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: var(--color-chrome);
+    border: 2px solid;
+    border-color: #fff #404040 #404040 #fff;
+  }
+
+  .bevel-out {
+    border: 2px solid;
+    border-color: #fff #404040 #404040 #fff;
+    box-shadow: inset -1px -1px 0 #808080, inset 1px 1px 0 #dfdfdf;
+  }
+  .bevel-in {
+    border: 2px solid;
+    border-color: #404040 #fff #fff #404040;
+    box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #dfdfdf;
+  }
+
+  .retro-btn {
+    display: inline-block;
+    background: var(--color-chrome);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 2px solid;
+    border-color: #fff #404040 #404040 #fff;
+    box-shadow: inset -1px -1px 0 #808080, inset 1px 1px 0 #dfdfdf;
+  }
+  .retro-btn:hover {
+    background: #e4e1da;
+  }
+  .retro-btn:active,
+  .retro-btn[aria-current="page"] {
+    border-color: #404040 #fff #fff #404040;
+    box-shadow: inset 1px 1px 0 #808080;
+  }
+  .retro-btn:active {
+    transform: translate(1px, 1px);
+  }
+  .retro-btn[aria-current="page"] {
+    background: var(--color-hilite);
+    font-weight: 600;
+  }
+  .retro-btn:focus-visible,
+  .tab:focus-visible {
+    outline: 2px dotted var(--color-ink);
+    outline-offset: -6px;
+  }
+  .retro-btn-danger {
+    color: #9b1c1c;
+    font-weight: 600;
+  }
+
+  .retro-input {
+    background: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    border: 2px solid;
+    border-color: #404040 #fff #fff #404040;
+    box-shadow: inset 1px 1px 0 #808080;
+    border-radius: 0;
+  }
+  .retro-input:focus {
+    outline: 2px solid var(--color-title-2);
+    outline-offset: 2px;
+  }
+
+  /* folder-style tabs */
+  .tab {
+    background: var(--color-chrome-dark);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    cursor: pointer;
+    padding: 0.5rem 1.25rem;
+    border: 2px solid;
+    border-color: #fff #404040 transparent #fff;
+  }
+  .tab:hover {
+    background: #bab6ae;
+  }
+  .tab[aria-selected="true"] {
+    background: var(--color-hilite);
+    font-weight: 600;
+    padding-top: 0.75rem;
+  }
+
+  /* loading bar */
+  .progress-bar {
+    height: 100%;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--color-title) 0 12px,
+      transparent 12px 16px
+    );
+    animation: march 0.8s linear infinite;
+  }
+
+  .blink {
+    animation: blink 1s steps(1) infinite;
+  }
+
+  /* react-toastify */
+  .retro-toast {
+    background: var(--color-chrome) !important;
+    color: var(--color-ink) !important;
+    font-family: var(--font-mono) !important;
+    border: 2px solid var(--color-ink) !important;
+    border-radius: 0 !important;
+    box-shadow: 4px 4px 0 var(--color-ink) !important;
+  }
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+@keyframes march {
+  to { background-position: 16px 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blink,
+  .progress-bar {
+    animation: none;
+  }
 }
